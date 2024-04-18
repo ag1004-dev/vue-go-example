@@ -12,8 +12,7 @@
       <input
         ref="queryRef"
         v-model="local.query"
-        class="vue-command__query__input"
-        :disabled="isOutdatedQuery"
+
         :placeholder="placeholder"
         :style="queryStyle"
         autocapitalize="none"
@@ -38,9 +37,7 @@
         class="vue-command__multiline-query__prompt">></span>
       <input
         ref="multilineQueryRefs"
-        class="vue-command__multiline-query__input"
-        :disabled="isOutdatedMultilineQuery(index)"
-        :style="queryStyle"
+
         :value="multilineQuery"
         autocapitalize="none"
         autocorrect="off"
@@ -181,6 +178,8 @@ const local = reactive({
 // Entered with "\"
 const multilineQueries = reactive([])
 
+// Determinates if the given multiline query by index is before the current
+// reverse I search or if reverse I search is not active
 const isBeforeReverseISearch = computed(() => {
   return index => xor(
     !isReverseISearch.value,
@@ -190,7 +189,8 @@ const isBeforeReverseISearch = computed(() => {
     )
   )
 })
-const isOutdatedMultilineQuery = computed(() => {
+// Determinates if the given multiline query by index is outdated
+const isDisabledMultilineQuery = computed(() => {
   return index => or(
     isOutdated.value,
     and(
@@ -199,7 +199,8 @@ const isOutdatedMultilineQuery = computed(() => {
     )
   )
 })
-const isOutdatedQuery = computed(() => {
+// As soon as the there multiline queries, query is disabled
+const isDisabledQuery = computed(() => {
   return or(isOutdated.value, !isEmpty(multilineQueries))
 })
 // Returns the last query or last multiline query
