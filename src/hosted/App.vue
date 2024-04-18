@@ -16,12 +16,14 @@
             v-model:dispatched-queries="dispatchedQueries"
             v-model:is-fullscreen="isFullscreen"
             v-model:history="history"
-            v-model:historyPosition="historyPosition"
+            v-model:history-position="historyPosition"
             v-model:query="query"
             :commands="commands"
+            :font="font"
             :help-text="helpText"
             :help-timeout="helpTimeout"
             :hide-bar="hideBar"
+            :hide-buttons="hideButtons"
             :hide-prompt="hidePrompt"
             :hide-title="hideTitle"
             :invert="invert"
@@ -71,7 +73,21 @@
               <tr>
                 <td><pre><code>hide-bar</code></pre></td>
                 <td>
-                  <pre><code>{{ hideBar }}</code></pre>
+                  <input
+                    v-model="hideBar"
+                    class="form-check-input"
+                    type="checkbox"
+                    value="">
+                </td>
+              </tr>
+              <tr>
+                <td><pre><code>hide-buttons</code></pre></td>
+                <td>
+                  <input
+                    v-model="hideButtons"
+                    class="form-check-input"
+                    type="checkbox"
+                    value="">
                 </td>
               </tr>
               <tr>
@@ -154,6 +170,7 @@
 import { ref } from 'vue'
 import VueCommand from '@/components/VueCommand'
 import {
+  createStderr,
   createStdout,
   createQuery,
   listFormatter,
@@ -173,9 +190,11 @@ export default {
   setup () {
     const cursorPosition = ref(0)
     const dispatchedQueries = ref(new Set())
+    const font = ref('')
     const helpText = ref('Type in help')
     const helpTimeout = ref(3500)
     const hideBar = ref(false)
+    const hideButtons = ref(false)
     const hidePrompt = ref(false)
     const hideTitle = ref(false)
     const history = ref(newDefaultHistory())
@@ -226,7 +245,7 @@ export default {
           prompt.value = `${PROMPT}`
         }
         if (lastArgument !== 'home' && lastArgument !== '../' && lastArgument !== '..') {
-          return createStdout(`bash: cd: ${lastArgument}: No such file or directory`)
+          return createStderr(`bash: cd: ${lastArgument}: No such file or directory`)
         }
 
         return createQuery()
@@ -236,7 +255,6 @@ export default {
         // "splice" is necessary since Vue.js losses its reactivity if array is
         // set to empty
         history.value.splice(0, history.value.length)
-
         return createQuery()
       },
 
@@ -254,11 +272,25 @@ export default {
       },
 
       nano: () => NanoEditor,
-      norris: () => ChuckNorris
+      norris: () => ChuckNorris,
+
+      'set-font': parsedQuery => {
+        if (parsedQuery.length < 2) {
+          return createStderr('Missing font')
+        }
+
+        const match = parsedQuery.at(1)
+        if (match) {
+          font.value = match.replace(/['"]+/g, '')
+          return createQuery()
+        }
+
+        return createStderr('Missing font')
+      }
     }
     commands.help = () => {
       const list = Object.keys(commands)
-      // TODO Create terminal-like columns
+      // TODO: Create terminal-like columns
       return createStdout(listFormatter(...list))
     }
 
@@ -270,6 +302,7 @@ export default {
       helpText,
       helpTimeout,
       hideBar,
+      hideButtons,
       hidePrompt,
       hideTitle,
       history,
@@ -280,6 +313,7 @@ export default {
       query,
       showHelp,
       title,
+      font,
 
       optionsResolver
     }
@@ -304,15 +338,15 @@ export default {
 
   .vue-command__bar,
   .vue-command__bar--invert {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
   }
 
   .vue-command__history,
   .vue-command__history--invert {
     height: 350px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
 }
 

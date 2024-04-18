@@ -1,3 +1,97 @@
+## [35.2.1](https://github.com/ndabAP/vue-command/compare/v35.2.0...v35.2.1) (2023-07-01)
+
+
+### Bug Fixes
+
+* stderr component name ([859769e](https://github.com/ndabAP/vue-command/commit/859769ecfd3983b55fba73e1e76ebf8783d572de))
+
+## [35.2.0](https://github.com/ndabAP/vue-command/compare/v35.1.0...v35.2.0) (2023-06-25)
+
+
+### Features
+
+* add stderr component ([fb280c0](https://github.com/ndabAP/vue-command/commit/fb280c00a9ac4f572d0d4e0ca8a01096151c1c7b))
+
+
+### Bug Fixes
+
+* set font ([f92d85c](https://github.com/ndabAP/vue-command/commit/f92d85cc7e97eb45bd1ebb72b37f1bf536bac25a))
+
+## [35.1.0](https://github.com/ndabAP/vue-command/compare/v35.0.0...v35.1.0) (2023-05-30)
+
+
+### Features
+
+* add font api and command ([e8111f3](https://github.com/ndabAP/vue-command/commit/e8111f392061676719f488c7ba2f47f610f26e07))
+
+## [35.0.0](https://github.com/ndabAP/vue-command/compare/v34.0.0...v35.0.0) (2023-05-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* update
+
+### Documentation
+
+* update ([9fe4674](https://github.com/ndabAP/vue-command/commit/9fe4674f85393e8335ff4b691791f0349185fb44))
+
+## [34.0.0](https://github.com/ndabAP/vue-command/compare/v33.0.1...v34.0.0) (2023-05-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* fix features bullet point escape
+* fix features bullet point
+
+### Features
+
+* hide buttons ([a71bf81](https://github.com/ndabAP/vue-command/commit/a71bf81d2a133884889a47776db1598ff0aa7bda))
+
+
+### Documentation
+
+* fix features bullet point ([60faa9a](https://github.com/ndabAP/vue-command/commit/60faa9af2b45807e5ce45cb3d1a0d87e5f57d967))
+* fix features bullet point escape ([c7850a5](https://github.com/ndabAP/vue-command/commit/c7850a531da197982121fbb32233777cd4dd28ca))
+
+## [33.1.0](https://github.com/ndabAP/vue-command/compare/v33.0.1...v33.1.0) (2023-05-07)
+
+
+### Features
+
+* hide buttons ([a71bf81](https://github.com/ndabAP/vue-command/commit/a71bf81d2a133884889a47776db1598ff0aa7bda))
+
+## [33.0.1](https://github.com/ndabAP/vue-command/compare/v33.0.0...v33.0.1) (2023-02-12)
+
+
+### Bug Fixes
+
+* dynamic prompt ([4f16289](https://github.com/ndabAP/vue-command/commit/4f16289f5661dad25a3b4202d86cd35ef592c387))
+
+## [33.0.0](https://github.com/ndabAP/vue-command/compare/v32.4.0...v33.0.0) (2023-02-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* code style, explain signals
+
+### Documentation
+
+* code style, explain signals ([e7f34c0](https://github.com/ndabAP/vue-command/commit/e7f34c0eb7b416b2059357c599aac633f97df435))
+
+## [32.4.0](https://github.com/ndabAP/vue-command/compare/v32.3.0...v32.4.0) (2023-02-12)
+
+
+### Features
+
+* prompt slot ([996b95d](https://github.com/ndabAP/vue-command/commit/996b95d122902fd25016045ba4849aa730c2e800))
+
+## [32.3.0](https://github.com/ndabAP/vue-command/compare/v32.2.1...v32.3.0) (2023-02-10)
+
+
+### Features
+
+* interpreter ([7b7258c](https://github.com/ndabAP/vue-command/commit/7b7258cbcb10cc313987403ab61169ced2b2d43c))
+
 ## [32.2.1](https://github.com/ndabAP/vue-command/compare/v32.2.0...v32.2.1) (2023-01-11)
 
 

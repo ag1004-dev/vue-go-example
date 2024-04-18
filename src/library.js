@@ -17,12 +17,18 @@ const ARROW_UP_KEY = 'ArrowUp'
 const ARROW_DOWN_KEY = 'ArrowDown'
 const C_KEY = 'c'
 
-// TODO Implement cursor keyboard combinations, e. g. Ctrl + u
+// TODO Implement keyboard combinations, e. g. Ctrl + u
 
 // Creates a command not found component
 export const createCommandNotFound = (command, notFoundText = 'command not found', name = 'VueCommandNotFound') => {
   const text = `${command}: ${notFoundText}`
   return createStdout(text, name)
+}
+
+// Creates a "stderr" with the given formatter or text and name. It exits as
+// soon as the component has been mounted
+export const createStderr = (formatterOrText, name = 'VueCommandStderr') => {
+  return createStdout(formatterOrText, name)
 }
 
 // Creates a "stdout" with the given formatter or text and name. It exits as

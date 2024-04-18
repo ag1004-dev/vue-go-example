@@ -3,29 +3,18 @@
     <!-- Query -->
     <div
       v-show="shouldShowQuery"
-      :class="{
-        'vue-command__query': !invert,
-        'vue-command__query--invert': invert
-      }">
-      <span
-        v-if="!hidePrompt"
-        :class="{
-          'vue-command__query__prompt': !invert,
-          'vue-command__query__prompt--invert': invert
-        }">
-        {{ local.prompt }}
-      </span>
+      class="vue-command__query">
+      <!-- Prompt -->
+      <VueCommandPrompt />
 
-      <!-- TODO Make textarea to enforce word break -->
+      <!-- Query -->
+      <!-- TODO: Implement line breaks -->
       <input
         ref="queryRef"
         v-model="local.query"
-        :class="{
-          'vue-command__query__input': !invert,
-          'vue-command__query__input--invert': invert
-        }"
-        :disabled="isDisabledQuery"
+
         :placeholder="placeholder"
+        :style="queryStyle"
         autocapitalize="none"
         autocorrect="off"
         type="text"
@@ -43,22 +32,12 @@
       v-for="(multilineQuery, index) in multilineQueries"
       v-show="isBeforeReverseISearch(index)"
       :key="index"
-      :class="{
-        'vue-command__multiline-query': !invert,
-        'vue-command__multiline-query--invert': invert
-      }">
+      class="vue-command__multiline-query">
       <span
-        :class="{
-          'vue-command__multiline-query__prompt': !invert,
-          'vue-command__multiline-query__prompt--invert': invert
-        }">></span>
+        class="vue-command__multiline-query__prompt">></span>
       <input
         ref="multilineQueryRefs"
-        :class="{
-          'vue-command__multiline-query__input': !invert,
-          'vue-command__multiline-query__input--invert': invert
-        }"
-        :disabled="isDisabledMultilineQuery(index)"
+
         :value="multilineQuery"
         autocapitalize="none"
         autocorrect="off"
@@ -75,22 +54,14 @@
     <!-- Reverse I search -->
     <div
       v-if="isReverseISearch"
-      :class="{
-        'vue-command__reverse-i-search': !invert,
-        'vue-command__reverse-i-search--invert': invert
-      }">
+      class="vue-command__reverse-i-search">
       <span
-        :class="{
-          'vue-command__reverse-i-search-status': !invert,
-          'vue-command__reverse-i-search-status--invert': invert
-        }">({{ reverseISearchStatus }})`</span><input
+        class="vue-command__reverse-i-search-status">({{ reverseISearchStatus }})`</span><input
         ref="reverseISearchRef"
         v-model="reverseISearch"
-        :class="{
-          'vue-command__reverse-i-search__input': !invert,
-          'vue-command__reverse-i-search__input--invert': invert
-        }"
+        class="vue-command__reverse-i-search__input"
         :disabled="isOutdated"
+        :style="queryStyle"
         autocapitalize="none"
         autocorrect="off"
         type="text"
@@ -116,7 +87,9 @@ import {
   onBeforeUnmount,
   reactive,
   nextTick,
-  computed
+  computed,
+  Fragment,
+  h
 } from 'vue'
 import {
   and,
@@ -140,13 +113,13 @@ import {
   set,
   trimStart,
   lt,
-  join
+  join,
+  isUndefined
 } from 'lodash'
 
 const appendToHistory = inject('appendToHistory')
 const dispatch = inject('dispatch')
 const hidePrompt = inject('hidePrompt')
-const invert = inject('invert')
 const helpText = inject('helpText')
 const helpTimeout = inject('helpTimeout')
 const optionsResolver = inject('optionsResolver')
@@ -156,6 +129,7 @@ const setCursorPosition = inject('setCursorPosition')
 const setQuery = inject('setQuery')
 const showHelp = inject('showHelp')
 const signals = inject('signals')
+const slots = inject('slots')
 const terminal = inject('terminal')
 
 // Indicates if the query, including multiline queries and reverse I search, is
@@ -169,8 +143,36 @@ const reverseISearchRef = ref(null)
 const reverseISearchStatus = ref('reverse-i-search')
 const queryRef = ref(null)
 
+// This shall not be reactive
+const prompt = terminal.value.prompt
+
+// Prompt slot with fallback
+const VueCommandPrompt = computed(() => {
+  if (hidePrompt) {
+    return h(Fragment)
+  }
+
+  // Render prompt slot if given
+  if (!isUndefined(slots.prompt)) {
+    return h(Fragment, slots.prompt())
+  }
+
+  // Show default prompt slot
+  return h(Fragment, h('span', {
+    class: 'vue-command__query__prompt'
+  }, prompt))
+})
+const queryStyle = computed(() => {
+  if (!isEmpty(terminal.value.font)) {
+    return {
+      font: `1rem ${terminal.value.font}`
+    }
+  }
+
+  return {}
+})
+
 const local = reactive({
-  prompt: terminal.value.prompt,
   query: ''
 })
 // Entered with "\"
@@ -510,7 +512,6 @@ defineExpose({
   .vue-command__multiline-query--invert {
     display: flex;
 
-    input::placeholder,
     input {
       font: 1rem Consolas,
         Monaco,

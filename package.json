@@ -1,6 +1,6 @@
 {
   "name": "vue-command",
-  "version": "32.2.1",
+  "version": "35.2.1",
   "description": "A fully working, most feature-rich Vue.js terminal emulator",
   "author": {
     "email": "kontakt@julian-claus.de",
@@ -34,7 +34,7 @@
     "dist/*.js.map"
   ],
   "scripts": {
-    "build": "yarn lint; yarn build:lib; yarn build:docs",
+    "build": "yarn lint && yarn build:docs && yarn build:lib",
     "build:docs": "vue-cli-service build --dest docs",
     "build:lib": "vue-cli-service build --target lib --name vue-command ./src/library.js",
     "lint": "vue-cli-service lint",
@@ -42,38 +42,38 @@
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "core-js": "^3.26.1",
+    "core-js": "^3.36.1",
     "lodash": "^4.17.21",
     "register-service-worker": "^1.7.2",
-    "vue": "^3.0.0"
+    "vue": "^3.4.21"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.3.0",
-    "@commitlint/config-conventional": "^17.3.0",
-    "@semantic-release/changelog": "^6.0.2",
+    "@commitlint/cli": "^17.8.1",
+    "@commitlint/config-conventional": "^17.6.6",
+    "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.7",
-    "@semantic-release/npm": "^9.0.1",
+    "@semantic-release/github": "^8.1.0",
+    "@semantic-release/npm": "^9.0.2",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@vue/cli-plugin-babel": "~4.5.13",
     "@vue/cli-plugin-eslint": "~4.5.13",
     "@vue/cli-plugin-pwa": "~4.5.13",
     "@vue/cli-plugin-unit-jest": "~4.5.13",
     "@vue/cli-service": "~4.5.13",
-    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/compiler-sfc": "^3.4.21",
     "@vue/eslint-config-standard": "^5.1.2",
-    "@vue/test-utils": "^2.2.6",
+    "@vue/test-utils": "^2.4.5",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-modules-newline": "^0.0.6",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.20.0",
-    "husky": "^8.0.2",
-    "sass": "^1.56.2",
+    "husky": "^8.0.3",
+    "sass": "^1.74.1",
     "sass-loader": "^8.0.2",
     "semantic-release": "^19.0.5",
     "vue-jest": "^5.0.0-0"
