@@ -42,7 +42,7 @@
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "core-js": "^3.35.1",
+    "core-js": "^3.36.1",
     "lodash": "^4.17.21",
     "register-service-worker": "^1.7.2",
     "vue": "^3.4.21"
@@ -61,9 +61,9 @@
     "@vue/cli-plugin-pwa": "~4.5.13",
     "@vue/cli-plugin-unit-jest": "~4.5.13",
     "@vue/cli-service": "~4.5.13",
-    "@vue/compiler-sfc": "^3.2.47",
+    "@vue/compiler-sfc": "^3.4.21",
     "@vue/eslint-config-standard": "^5.1.2",
-    "@vue/test-utils": "^2.4.1",
+    "@vue/test-utils": "^2.4.5",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.29.1",
@@ -73,7 +73,7 @@
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.20.0",
     "husky": "^8.0.3",
-    "sass": "^1.69.5",
+    "sass": "^1.74.1",
     "sass-loader": "^8.0.2",
     "semantic-release": "^19.0.5",
     "vue-jest": "^5.0.0-0"
